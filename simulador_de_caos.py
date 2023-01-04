@@ -1,8 +1,9 @@
 import random
+import seaborn as sns
 
 class Academia:
     def __init__(self):
-        self.halteres = [i for i in range(10, 50) if i % 2 == 0]
+        self.halteres = [i for i in range(10, 100) if i % 2 == 0]
         self.porta_halteres = {}
         self.reiniciar_o_dia()
 
@@ -60,12 +61,20 @@ usuarios = [Usuario(1, academia) for i in range(10)]
 usuarios += [Usuario(2, academia) for i in range(1)]
 random.shuffle(usuarios)
 
-for i in range(10):
-    random.shuffle(usuarios)
-    for user in usuarios:
-        user.iniciar_treino()
-    for user in usuarios:
-        user.finalizar_treino()
+list_chaos = []
+
+for k in range(50):
+    academia.reiniciar_o_dia()
+    for i in range(10):
+        random.shuffle(usuarios)
+        for user in usuarios:
+            user.iniciar_treino()
+        for user in usuarios:
+            user.finalizar_treino()
+    list_chaos += [academia.calcular_caos()]
+    
         
-academia.porta_halteres
-academia.calcular_caos()
+#academia.porta_halteres
+#academia.calcular_caos()
+
+sns.displot(list_chaos)
